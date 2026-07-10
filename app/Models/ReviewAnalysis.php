@@ -22,6 +22,10 @@ class ReviewAnalysis extends Model
         'category',
         'reason',
         'raw_response',
+        'execution_time_ms',
+        'input_tokens',
+        'output_tokens',
+        'cost',
         'analyzed_at',
     ];
 

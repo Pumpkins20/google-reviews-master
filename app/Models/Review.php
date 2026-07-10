@@ -47,6 +47,12 @@ class Review extends Model
 
     public function analysis()
     {
-        return $this->hasOne(ReviewAnalysis::class, 'review_id', 'review_id');
+        return $this->hasOne(ReviewAnalysis::class, 'review_id', 'review_id')
+            ->where('provider', config('ai.default', 'gemini'));
+    }
+
+    public function analyses()
+    {
+        return $this->hasMany(ReviewAnalysis::class, 'review_id', 'review_id');
     }
 }
