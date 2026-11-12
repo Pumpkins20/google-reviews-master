@@ -38,7 +38,9 @@ return [
             'driver' => 'database',
             'table' => 'jobs',
             'queue' => 'default',
-            'retry_after' => 90,
+            // Must exceed the longest job (scrapes take minutes), otherwise a
+            // running job is handed to a second worker.
+            'retry_after' => (int) env('QUEUE_RETRY_AFTER', 90),
         ],
 
         'beanstalkd' => [

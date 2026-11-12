@@ -41,7 +41,7 @@ class ImportReviews extends Command
      */
     public function handle()
     {
-        $filePath = $this->argument('file') ?? base_path('../google-reviews-scraper-pro/reviews.db');
+        $filePath = $this->argument('file') ?? config('scraper.path') . DIRECTORY_SEPARATOR . config('scraper.db');
 
         $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
 
@@ -51,8 +51,8 @@ class ImportReviews extends Command
                 $this->warn("SQLite PDO driver is not enabled in your PHP installation.");
                 $this->info("Attempting to export database to JSON using the Python scraper instead...");
 
-                $scraperPath = base_path('../google-reviews-scraper-pro');
-                $jsonPath = base_path('../google-reviews-scraper-pro/google_reviews.json');
+                $scraperPath = config('scraper.path');
+                $jsonPath = $scraperPath . DIRECTORY_SEPARATOR . 'google_reviews.json';
                 
                 // 1. Pre-sync place names using Python script directly from reviews.db
                 if (file_exists($filePath)) {
